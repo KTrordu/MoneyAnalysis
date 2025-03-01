@@ -13,5 +13,7 @@ namespace App.Domain.Entities
         public DateTime ExpenseDate { get; set; }
         public int? ExpenseCategoryId { get; set; }
         public ExpenseCategory ExpenseCategory { get; set; }
+        public int? UserId { get; set; }
+        public User User { get; set; }
     }
 }
