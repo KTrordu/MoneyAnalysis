@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace App.DAL
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -18,6 +18,12 @@ namespace App.DAL
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            var userLoginEntity = builder.Model.FindEntityType(typeof(IdentityUserLogin<string>));
+            if (userLoginEntity != null)
+            {
+                builder.Model.RemoveEntityType(userLoginEntity);
+            }
         }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<ExpenseCategory> ExpenseCategories { get; set; }
