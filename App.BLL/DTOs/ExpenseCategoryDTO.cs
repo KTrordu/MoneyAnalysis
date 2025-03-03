@@ -9,6 +9,6 @@ namespace App.BLL.DTOs
     public class ExpenseCategoryDTO
     {
         public int Id { get; set; }
-        public string CategoryName { get; set; }
+        public string ExpenseCategoryName { get; set; }
     }
 }
