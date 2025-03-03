@@ -1,5 +1,6 @@
 ﻿using App.Domain.Entities;
 using App.UI.ViewModels.Role;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;

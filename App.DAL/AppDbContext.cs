@@ -26,7 +26,7 @@ namespace App.DAL
                 modelBuilder.Model.RemoveEntityType(userLoginEntity);
             }
 
-            modelBuilder.Entity<IdentityUser>(b =>
+            modelBuilder.Entity<ApplicationUser>(b =>
             {
                 b.ToTable("Users");
             });
