@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using App.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using System.Reflection.Emit;
 
 namespace App.DAL
 {
@@ -15,15 +16,45 @@ namespace App.DAL
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
 
-            var userLoginEntity = builder.Model.FindEntityType(typeof(IdentityUserLogin<string>));
+            var userLoginEntity = modelBuilder.Model.FindEntityType(typeof(IdentityUserLogin<string>));
             if (userLoginEntity != null)
             {
-                builder.Model.RemoveEntityType(userLoginEntity);
+                modelBuilder.Model.RemoveEntityType(userLoginEntity);
             }
+
+            modelBuilder.Entity<IdentityUser>(b =>
+            {
+                b.ToTable("Users");
+            });
+
+            modelBuilder.Entity<IdentityUserClaim<string>>(b =>
+            {
+                b.ToTable("UserClaims");
+            });
+
+            modelBuilder.Entity<IdentityUserToken<string>>(b =>
+            {
+                b.ToTable("UserTokens");
+            });
+
+            modelBuilder.Entity<IdentityRole>(b =>
+            {
+                b.ToTable("Roles");
+            });
+
+            modelBuilder.Entity<IdentityRoleClaim<string>>(b =>
+            {
+                b.ToTable("RoleClaims");
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>(b =>
+            {
+                b.ToTable("UserRoles");
+            });
         }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<ExpenseCategory> ExpenseCategories { get; set; }
