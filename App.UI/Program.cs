@@ -16,6 +16,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
