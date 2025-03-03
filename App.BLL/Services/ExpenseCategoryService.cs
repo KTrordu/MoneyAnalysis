@@ -24,6 +24,19 @@ namespace App.BLL.Services
 
         public async Task AddExpenseCategoryAsync(ExpenseCategoryDTO expenseCategoryDTO)
         {
+            if (string.IsNullOrWhiteSpace(expenseCategoryDTO.ExpenseCategoryName))
+            {
+                throw new ArgumentException("Expense category name cannot be empty");
+            }
+            if (expenseCategoryDTO.ExpenseCategoryName.Length > 20)
+            {
+                throw new ArgumentException("Expense category name cannot be longer than 20 characters");
+            }
+            if (expenseCategoryDTO.ExpenseCategoryName.Length < 3)
+            {
+                throw new ArgumentException("Expense category name cannot be shorter than 3 characters");
+            }
+
             var expenseCategory = new ExpenseCategory
             {
                 ExpenseCategoryName = expenseCategoryDTO.ExpenseCategoryName,
@@ -58,6 +71,19 @@ namespace App.BLL.Services
 
         public async Task UpdateExpenseCategoryAsync(ExpenseCategoryDTO expenseCategoryDTO)
         {
+            if (string.IsNullOrWhiteSpace(expenseCategoryDTO.ExpenseCategoryName))
+            {
+                throw new ArgumentException("Expense category name cannot be empty");
+            }
+            if (expenseCategoryDTO.ExpenseCategoryName.Length > 20)
+            {
+                throw new ArgumentException("Expense category name cannot be longer than 20 characters");
+            }
+            if (expenseCategoryDTO.ExpenseCategoryName.Length < 3)
+            {
+                throw new ArgumentException("Expense category name cannot be shorter than 3 characters");
+            }
+
             var expenseCategory = new ExpenseCategory
             {
                 ExpenseCategoryName = expenseCategoryDTO.ExpenseCategoryName,
