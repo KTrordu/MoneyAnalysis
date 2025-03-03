@@ -123,6 +123,7 @@ namespace App.BLL.Services
             };
 
             await _expenseRepository.UpdateAsync(expense, expense.Id);
+            await _expenseRepository.SaveChangesAsync();
         }
 
         public async Task DeleteExpenseAsync(int id)
@@ -130,6 +131,7 @@ namespace App.BLL.Services
             var expense = await _expenseRepository.GetByIdAsync(id);
 
             await _expenseRepository.Delete(expense);
+            await _expenseRepository.SaveChangesAsync();
         }
     }
 }
