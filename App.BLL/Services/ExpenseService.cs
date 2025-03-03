@@ -36,6 +36,14 @@ namespace App.BLL.Services
             {
                 throw new ArgumentException("Expense name cannot be empty");
             }
+            if (expenseDTO.ExpenseName.Length > 20)
+            {
+                throw new ArgumentException("Expense name cannot be longer than 20 characters");
+            }
+            if (expenseDTO.ExpenseName.Length < 3)
+            {
+                throw new ArgumentException("Expense name cannot be shorter than 3 characters");
+            }
             if (expenseDTO.ExpenseDate < DateTime.Now.AddYears(-1))
             {
                 throw new ArgumentException("Expense date cannot be older than 1 year");
@@ -102,6 +110,14 @@ namespace App.BLL.Services
             if (string.IsNullOrWhiteSpace(expenseDTO.ExpenseName))
             {
                 throw new ArgumentException("Expense name cannot be empty");
+            }
+            if (expenseDTO.ExpenseName.Length > 20)
+            {
+                throw new ArgumentException("Expense name cannot be longer than 20 characters");
+            }
+            if (expenseDTO.ExpenseName.Length < 3)
+            {
+                throw new ArgumentException("Expense name cannot be shorter than 3 characters");
             }
             if (expenseDTO.ExpenseDate < DateTime.Now.AddYears(-1))
             {
