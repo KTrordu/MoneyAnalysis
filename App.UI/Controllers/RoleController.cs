@@ -49,5 +49,28 @@ namespace App.UI.Controllers
 
             return View(roleName);
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+                IdentityResult result = await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    Errors(result);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "No role found");
+            }
+
+            return View("Index", _roleManager.Roles);
+        }
     }
 }
