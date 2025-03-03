@@ -23,14 +23,14 @@ namespace App.DAL.Repositories
             await _db.Expenses.AddAsync(expense);
         }
 
-        public async Task<Expense> GetByIdAsync(int id)
-        {
-            return await _db.Expenses.FirstOrDefaultAsync(e => e.Id == id);
-        }
-
         public async Task<IEnumerable<Expense>> GetAllAsync()
         {
             return await _db.Expenses.ToListAsync();
+        }
+
+        public async Task<Expense> GetByIdAsync(int id)
+        {
+            return await _db.Expenses.FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task UpdateAsync(Expense expense, int id)
