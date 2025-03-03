@@ -18,6 +18,7 @@ namespace App.UI.Controllers
             _userManager = userManager;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View(_roleManager.Roles);
@@ -31,11 +32,13 @@ namespace App.UI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create([Required] string roleName)
         {
@@ -55,6 +58,7 @@ namespace App.UI.Controllers
             return View(roleName);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -75,6 +79,7 @@ namespace App.UI.Controllers
             });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Update(RoleModificationViewModel model)
         {
@@ -118,6 +123,7 @@ namespace App.UI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
