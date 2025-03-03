@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using App.DAL;
 using App.Domain.Entities;
+using App.BLL.IContexts;
+using App.UI.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +51,9 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserContext, UserContext>();
 
 var app = builder.Build();
 
