@@ -24,6 +24,27 @@ namespace App.BLL.Services
 
         public async Task AddExpenseAsync(ExpenseDTO expenseDTO)
         {
+            if (expenseDTO.UserId != _userContext.UserId)
+            {
+                throw new UnauthorizedAccessException();
+            }
+            if (expenseDTO.Amount <= 0)
+            {
+                throw new ArgumentException("Amount must be greater than 0");
+            }
+            if (string.IsNullOrWhiteSpace(expenseDTO.ExpenseName))
+            {
+                throw new ArgumentException("Expense name cannot be empty");
+            }
+            if (expenseDTO.ExpenseDate < DateTime.Now.AddYears(-1))
+            {
+                throw new ArgumentException("Expense date cannot be older than 1 year");
+            }
+            if (expenseDTO.ExpenseDate > DateTime.Now)
+            {
+                throw new ArgumentException("Expense date cannot be in the future");
+            }
+
             var expense = new Expense
             {
                 ExpenseName = expenseDTO.ExpenseName,
@@ -70,6 +91,27 @@ namespace App.BLL.Services
 
         public async Task UpdateExpenseAsync(ExpenseDTO expenseDTO)
         {
+            if (expenseDTO.UserId != _userContext.UserId)
+            {
+                throw new UnauthorizedAccessException();
+            }
+            if (expenseDTO.Amount <= 0)
+            {
+                throw new ArgumentException("Amount must be greater than 0");
+            }
+            if (string.IsNullOrWhiteSpace(expenseDTO.ExpenseName))
+            {
+                throw new ArgumentException("Expense name cannot be empty");
+            }
+            if (expenseDTO.ExpenseDate < DateTime.Now.AddYears(-1))
+            {
+                throw new ArgumentException("Expense date cannot be older than 1 year");
+            }
+            if (expenseDTO.ExpenseDate > DateTime.Now)
+            {
+                throw new ArgumentException("Expense date cannot be in the future");
+            }
+
             var expense = new Expense
             {
                 Id = expenseDTO.Id,
