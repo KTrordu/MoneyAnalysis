@@ -4,6 +4,8 @@ using App.DAL;
 using App.Domain.Entities;
 using App.BLL.IContexts;
 using App.UI.Contexts;
+using App.BLL.IServices;
+using App.BLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +56,9 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserContext, UserContext>();
+builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
