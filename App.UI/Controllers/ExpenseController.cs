@@ -1,6 +1,8 @@
 ﻿using App.BLL.IServices;
+using App.UI.CRUDModels.Expense;
 using App.UI.ViewModels.Expense;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace App.UI.Controllers
 {
@@ -8,11 +10,13 @@ namespace App.UI.Controllers
     {
         private readonly IExpenseService _expenseService;
         private readonly IExpenseCategoryService _expenseCategoryService;
+        private readonly IUserService _userService;
 
-        public ExpenseController(IExpenseService expenseService, IExpenseCategoryService expenseCategoryService)
+        public ExpenseController(IExpenseService expenseService, IExpenseCategoryService expenseCategoryService, IUserService userService)
         {
             _expenseService = expenseService;
             _expenseCategoryService = expenseCategoryService;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index()
@@ -39,6 +43,27 @@ namespace App.UI.Controllers
             }
 
             return await Task.FromResult((IActionResult)View(expenseList));
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var expenseCategories = await _expenseCategoryService.GetAllExpenseCategoriesAsync();
+            var users = await _userService.GetAllUsersAsync();
+
+            var model = new ExpenseCRUDModel
+            {
+                ExpenseCategories = expenseCategories.Select(e => new SelectListItem
+                {
+                    Value = e.Id.ToString(),
+                    Text = e.ExpenseCategoryName
+                }),
+                Users = users.Select(u => new SelectListItem
+                {
+                    Value = u.Id,
+                    Text = u.UserName
+                })
+            };
+            return await Task.FromResult((IActionResult)RedirectToAction("Index"));
         }
     }
 }
