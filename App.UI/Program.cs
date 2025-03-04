@@ -6,6 +6,8 @@ using App.BLL.IContexts;
 using App.UI.Contexts;
 using App.BLL.IServices;
 using App.BLL.Services;
+using App.DAL.IRepositories;
+using App.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +58,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserContext, UserContext>();
+
+builder.Services.AddScoped<IExpenseCategoryRepository, ExpenseCategoryRepository>();
+builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<IUserService, UserService>();
