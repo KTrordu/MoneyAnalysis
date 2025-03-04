@@ -4,10 +4,20 @@
 
 <h1 class="display-1 text-center">Admin Panel</h1>
 <div class="container-fluid row mt-3">
-    <div class="col-6">
-        <a class="btn btn-success w-100" asp-controller="Role" asp-action="Index">Roles</a>
+    <div class="container row col-12 mb-3">
+        <div class="col-6">
+            <a class="btn btn-success w-100" asp-controller="Role" asp-action="Index">Roles</a>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-info w-100" asp-controller="User" asp-action="Index">Users</a>
+        </div>
     </div>
-    <div class="col-6">
-        <a class="btn btn-info w-100" asp-controller="User" asp-action="Index">Users</a>
+    <div class="container row col-12">
+        <div class="col-6">
+            <a class="btn btn-warning w-100" asp-controller="ExpenseCategory" asp-action="Index">Expense Categories</a>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-danger w-100" asp-controller="Expense" asp-action="Index">Expenses</a>
+        </div>
     </div>
 </div>
