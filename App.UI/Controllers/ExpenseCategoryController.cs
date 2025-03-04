@@ -1,5 +1,6 @@
 ﻿using App.BLL.DTOs;
 using App.BLL.IServices;
+using App.UI.CRUDModels.ExpenseCategory;
 using App.UI.ViewModels.ExpenseCategory;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,11 +37,11 @@ namespace App.UI.Controllers
 
         //CREATE: POST
         [HttpPost]
-        public async Task<IActionResult> Create(ExpenseCategoryViewModel expenseCategoryViewModel)
+        public async Task<IActionResult> Create(ExpenseCategoryCRUDModel expenseCategoryCRUDModel)
         {
             var expenseCategoryDTO = new ExpenseCategoryDTO
             {
-                ExpenseCategoryName = expenseCategoryViewModel.ExpenseCategoryName
+                ExpenseCategoryName = expenseCategoryCRUDModel.ExpenseCategoryName
             };
             await _expenseCategoryService.AddExpenseCategoryAsync(expenseCategoryDTO);
             return await Task.FromResult((IActionResult)RedirectToAction("Index"));
