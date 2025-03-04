@@ -48,5 +48,25 @@ namespace App.UI.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //DELETE: GET
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound();
+
+            return View(user);
+        }
+
+        //DELETE: POST
+        [HttpPost]
+        public async Task<IActionResult> Delete(UserDTO userDTO)
+        {
+            var userToDelete = await _userManager.FindByIdAsync(userDTO.Id);
+            if (userToDelete == null) return NotFound();
+
+            await _userService.DeleteUserAsync(userDTO.Id);
+            return RedirectToAction("Index");
+        }
     }
 }
