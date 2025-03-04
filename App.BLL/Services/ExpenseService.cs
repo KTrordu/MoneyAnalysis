@@ -59,7 +59,9 @@ namespace App.BLL.Services
                 Amount = expenseDTO.Amount,
                 ExpenseDate = expenseDTO.ExpenseDate,
                 ExpenseCategoryId = expenseDTO.ExpenseCategoryId,
-                UserId = _userContext.UserId
+                UserId = _userContext.UserId,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
             };
 
             await _expenseRepository.AddAsync(expense);
@@ -70,7 +72,10 @@ namespace App.BLL.Services
         {
             var expenses = await _expenseRepository.GetAllAsync();
 
-            return expenses.Select(e => new ExpenseDTO
+            return expenses
+                .Where(e => e.UserId == _userContext.UserId
+                &&     !e.IsDeleted)
+                .Select(e => new ExpenseDTO
             {
                 Id = e.Id,
                 ExpenseName = e.ExpenseName,
