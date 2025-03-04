@@ -71,5 +71,25 @@ namespace App.UI.Controllers
             await _expenseCategoryService.UpdateExpenseCategoryAsync(expenseCategoryDTO);
             return await Task.FromResult((IActionResult)RedirectToAction("Index"));
         }
+
+        //DELETE: GET
+        public async Task<IActionResult> Delete(int id)
+        {
+            var expenseCategoryToDelete = await _expenseCategoryService.GetExpenseCategoryByIdAsync(id);
+            return await Task.FromResult((IActionResult)
+                View(new ExpenseCategoryCRUDModel
+                {
+                    Id = expenseCategoryToDelete.Id,
+                    ExpenseCategoryName = expenseCategoryToDelete.ExpenseCategoryName
+                }));
+        }
+
+        //DELETE: POST
+        [HttpPost]
+        public async Task<IActionResult> Delete(ExpenseCategoryCRUDModel expenseCategoryCRUDModel)
+        {
+            await _expenseCategoryService.DeleteExpenseCategoryAsync(expenseCategoryCRUDModel.Id);
+            return await Task.FromResult((IActionResult)RedirectToAction("Index"));
+        }
     }
 }
