@@ -52,11 +52,12 @@ namespace App.UI.Controllers
         {
             var expenseCategoryToUpdate = await _expenseCategoryService.GetExpenseCategoryByIdAsync(id);
 
-            return View(new ExpenseCategoryCRUDModel
-            {
-                Id = expenseCategoryToUpdate.Id,
-                ExpenseCategoryName = expenseCategoryToUpdate.ExpenseCategoryName
-            });
+            return await Task.FromResult((IActionResult)
+                View(new ExpenseCategoryCRUDModel
+                {
+                    Id = expenseCategoryToUpdate.Id,
+                    ExpenseCategoryName = expenseCategoryToUpdate.ExpenseCategoryName
+                }));
         }
 
         //UPDATE: POST
