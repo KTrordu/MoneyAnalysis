@@ -25,12 +25,16 @@ namespace App.DAL.Repositories
 
         public async Task<IEnumerable<ExpenseCategory>> GetAllAsync()
         {
-            return await _db.ExpenseCategories.ToListAsync();
+            return await _db.ExpenseCategories
+                .Where(ec => !ec.IsDeleted)
+                .ToListAsync();
         }
 
         public async Task<ExpenseCategory> GetByIdAsync(int id)
         {
-            return await _db.ExpenseCategories.FirstOrDefaultAsync(ec => ec.Id == id);
+            return await _db.ExpenseCategories
+                .Where(ec => !ec.IsDeleted)
+                .FirstOrDefaultAsync(ec => ec.Id == id);
         }
 
         public async Task UpdateAsync(ExpenseCategory expenseCategory, int id)
