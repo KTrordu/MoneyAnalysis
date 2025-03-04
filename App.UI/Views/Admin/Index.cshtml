@@ -3,8 +3,11 @@
 }
 
 <h1 class="display-1 text-center">Admin Panel</h1>
-<div class="container row">
-    <div class="col-4">
-        <a class="btn btn-success" asp-controller="Role" asp-action="Index">Roles</a>
+<div class="container-fluid row mt-3">
+    <div class="col-6">
+        <a class="btn btn-success w-100" asp-controller="Role" asp-action="Index">Roles</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-info w-100" asp-controller="User" asp-action="Index">Users</a>
     </div>
 </div>
