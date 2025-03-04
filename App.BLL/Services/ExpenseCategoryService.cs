@@ -40,7 +40,9 @@ namespace App.BLL.Services
             var expenseCategory = new ExpenseCategory
             {
                 ExpenseCategoryName = expenseCategoryDTO.ExpenseCategoryName,
-                Id = expenseCategoryDTO.Id
+                Id = expenseCategoryDTO.Id,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
             };
 
             await _expenseCategoryRepository.AddAsync(expenseCategory);
