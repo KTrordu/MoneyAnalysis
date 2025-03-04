@@ -1,4 +1,5 @@
-﻿using App.BLL.IServices;
+﻿using App.BLL.DTOs;
+using App.BLL.IServices;
 using App.UI.ViewModels.ExpenseCategory;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,9 +29,21 @@ namespace App.UI.Controllers
         }
 
         //CREATE: GET
-        public Task<IActionResult> Create()
+        public async Task<IActionResult> Create()
         {
-            return Task.FromResult((IActionResult)View());
+            return await Task.FromResult((IActionResult)View());
+        }
+
+        //CREATE: POST
+        [HttpPost]
+        public async Task<IActionResult> Create(ExpenseCategoryViewModel expenseCategoryViewModel)
+        {
+            var expenseCategoryDTO = new ExpenseCategoryDTO
+            {
+                ExpenseCategoryName = expenseCategoryViewModel.ExpenseCategoryName
+            };
+            await _expenseCategoryService.AddExpenseCategoryAsync(expenseCategoryDTO);
+            return await Task.FromResult((IActionResult)RedirectToAction("Index"));
         }
     }
 }

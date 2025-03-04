@@ -29,21 +29,21 @@
         @foreach(var category in Model)
         {
             <tr>
-                <th>
+                <td>
                     @category.Id
-                </th>
-                <th>
+                </td>
+                <td>
                     @category.ExpenseCategoryName
-                </th>
-                <th>
+                </td>
+                <td>
                     @category.CreatedDate.ToShortDateString()
-                </th>
-                <th>
+                </td>
+                <td>
                     <a class="btn btn-warning w-100" asp-controller="ExpenseCategory" asp-action="Update" asp-route-id="@category.Id">Edit</a>
-                </th>
-                <th>
-                    <a class="btn btn-warning w-100" asp-controller="ExpenseCategory" asp-action="Delete" asp-route-id="@category.Id">Delete</a>
-                </th>
+                </td>
+                <td>
+                    <a class="btn btn-danger w-100" asp-controller="ExpenseCategory" asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
