@@ -1,0 +1,71 @@
+﻿@model IEnumerable<App.UI.ViewModels.Expense.ExpenseViewModel>
+@{
+    ViewData["Title"] = "Expenses";
+}
+<h1 class="display-1 text-center">Expenses Panel</h1>
+<a class="btn btn-dark" asp-controller="Expense" asp-action="Create">Create Expense</a>
+<table class="table table-striped table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                CategoryId
+            </th>
+            <th>
+                UserId
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var expense in Model)
+        {
+            <tr>
+                <td>
+                    @expense.Id
+                </td>
+                <td>
+                    @expense.ExpenseName
+                </td>
+                <td>
+                    @expense.Amount
+                </td>
+                <td>
+                    @expense.ExpenseDate.ToShortDateString()
+                </td>
+                <td>
+                    @expense.ExpenseCategoryName
+                </td>
+                <td>
+                    @expense.ExpenseCategoryId
+                </td>
+                <td>
+                    @expense.UserId
+                </td>
+                <td>
+                    <a class="btn btn-warning w-100" asp-controller="Expense" asp-action="Update" asp-route-id="@expense.Id">Update</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger w-100" asp-controller="Expense" asp-action="Delete" asp-route-id="@expense.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
