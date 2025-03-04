@@ -54,7 +54,8 @@ namespace App.BLL.Services
             return expenseCategories.Select(e => new ExpenseCategoryDTO
             {
                 ExpenseCategoryName = e.ExpenseCategoryName,
-                Id = e.Id
+                Id = e.Id,
+                CreatedDate = e.CreatedDate
             });
         }
 
@@ -65,7 +66,8 @@ namespace App.BLL.Services
             return new ExpenseCategoryDTO
             {
                 ExpenseCategoryName = expenseCategory.ExpenseCategoryName,
-                Id = expenseCategory.Id
+                Id = expenseCategory.Id,
+                CreatedDate = expenseCategory.CreatedDate
             };
         }
 
