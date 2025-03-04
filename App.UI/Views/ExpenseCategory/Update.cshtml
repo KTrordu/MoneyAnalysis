@@ -1,0 +1,18 @@
+﻿@model App.UI.CRUDModels.ExpenseCategory.ExpenseCategoryCRUDModel
+@{
+    ViewData["Title"] = "Update Category";
+}
+
+<h1 class="display-1 text-center">Update Expense Category</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-controller="ExpenseCategory" asp-action="Update" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="ExpenseCategoryName">Name</label>
+        <input asp-for="ExpenseCategoryName" class="form-control" />
+        <span asp-validation-for="ExpenseCategoryName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+    <a class="btn btn-dark" asp-controller="ExpenseCategory" asp-action="Index">Back to List</a>
+</form>

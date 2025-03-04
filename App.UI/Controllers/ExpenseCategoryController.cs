@@ -46,5 +46,30 @@ namespace App.UI.Controllers
             await _expenseCategoryService.AddExpenseCategoryAsync(expenseCategoryDTO);
             return await Task.FromResult((IActionResult)RedirectToAction("Index"));
         }
+
+        //UPDATE: GET
+        public async Task<IActionResult> Update(int id)
+        {
+            var expenseCategoryToUpdate = await _expenseCategoryService.GetExpenseCategoryByIdAsync(id);
+
+            return View(new ExpenseCategoryCRUDModel
+            {
+                Id = expenseCategoryToUpdate.Id,
+                ExpenseCategoryName = expenseCategoryToUpdate.ExpenseCategoryName
+            });
+        }
+
+        //UPDATE: POST
+        [HttpPost]
+        public async Task<IActionResult> Update(ExpenseCategoryCRUDModel expenseCategoryCRUDModel)
+        {
+            var expenseCategoryDTO = new ExpenseCategoryDTO
+            {
+                Id = expenseCategoryCRUDModel.Id,
+                ExpenseCategoryName = expenseCategoryCRUDModel.ExpenseCategoryName
+            };
+            await _expenseCategoryService.UpdateExpenseCategoryAsync(expenseCategoryDTO);
+            return await Task.FromResult((IActionResult)RedirectToAction("Index"));
+        }
     }
 }
