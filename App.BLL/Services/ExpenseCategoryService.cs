@@ -91,7 +91,8 @@ namespace App.BLL.Services
             var expenseCategory = new ExpenseCategory
             {
                 ExpenseCategoryName = expenseCategoryDTO.ExpenseCategoryName,
-                Id = expenseCategoryDTO.Id
+                Id = expenseCategoryDTO.Id,
+                ModifiedDate = DateTime.Now
             };
 
             await _expenseCategoryRepository.UpdateAsync(expenseCategory, expenseCategory.Id);
