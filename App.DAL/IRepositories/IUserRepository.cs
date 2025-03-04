@@ -14,5 +14,6 @@ namespace App.DAL.IRepositories
         Task<ApplicationUser> GetByIdAsync(string id);
         Task UpdateAsync(ApplicationUser user);
         Task Delete(string id);
+        Task SaveChangesAsync();
     }
 }
