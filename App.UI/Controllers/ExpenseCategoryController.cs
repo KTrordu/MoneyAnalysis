@@ -29,6 +29,7 @@ namespace App.UI.Controllers
             {
                 Id = expenseCategory.Id,
                 ExpenseCategoryName = expenseCategory.ExpenseCategoryName,
+                UserId = expenseCategory.UserId,
                 CreatedDate = expenseCategory.CreatedDate
             });
 
@@ -58,7 +59,8 @@ namespace App.UI.Controllers
         {
             var expenseCategoryDTO = new ExpenseCategoryDTO
             {
-                ExpenseCategoryName = expenseCategoryCRUDModel.ExpenseCategoryName
+                ExpenseCategoryName = expenseCategoryCRUDModel.ExpenseCategoryName,
+                UserId = expenseCategoryCRUDModel.UserId
             };
             await _expenseCategoryService.AddExpenseCategoryAsync(expenseCategoryDTO);
             return await Task.FromResult((IActionResult)RedirectToAction("Index"));
@@ -92,7 +94,8 @@ namespace App.UI.Controllers
             var expenseCategoryDTO = new ExpenseCategoryDTO
             {
                 Id = expenseCategoryCRUDModel.Id,
-                ExpenseCategoryName = expenseCategoryCRUDModel.ExpenseCategoryName
+                ExpenseCategoryName = expenseCategoryCRUDModel.ExpenseCategoryName,
+                UserId = expenseCategoryCRUDModel.UserId
             };
             await _expenseCategoryService.UpdateExpenseCategoryAsync(expenseCategoryDTO);
             return await Task.FromResult((IActionResult)RedirectToAction("Index"));

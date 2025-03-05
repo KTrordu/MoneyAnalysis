@@ -42,6 +42,7 @@ namespace App.DAL.Repositories
             ExpenseCategory expenseCategoryToUpdate = await GetByIdAsync(id);
 
             expenseCategoryToUpdate.ExpenseCategoryName = expenseCategory.ExpenseCategoryName;
+            expenseCategoryToUpdate.UserId = expenseCategory.UserId;
             expenseCategoryToUpdate.ModifiedDate = DateTime.Now;
 
             _db.ExpenseCategories.Update(expenseCategoryToUpdate);
