@@ -1,18 +1,24 @@
 ﻿using App.BLL.DTOs;
 using App.BLL.IServices;
+using App.Domain.Entities;
 using App.UI.CRUDModels.ExpenseCategory;
 using App.UI.ViewModels.ExpenseCategory;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.UI.Controllers
 {
     public class ExpenseCategoryController : Controller
     {
         private readonly IExpenseCategoryService _expenseCategoryService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ExpenseCategoryController(IExpenseCategoryService expenseCategoryService)
+        public ExpenseCategoryController(IExpenseCategoryService expenseCategoryService, UserManager<ApplicationUser> userManager)
         {
             _expenseCategoryService = expenseCategoryService;
+            _userManager = userManager;
         }
 
         //READ: List all expense categories
@@ -32,7 +38,18 @@ namespace App.UI.Controllers
         //CREATE: GET
         public async Task<IActionResult> Create()
         {
-            return await Task.FromResult((IActionResult)View());
+            var users = await _userManager.Users.ToListAsync();
+
+            var model = new ExpenseCategoryCRUDModel
+            {
+                Users = users.Select(u => new SelectListItem
+                {
+                    Value = u.Id,
+                    Text = u.UserName
+                })
+            };
+
+            return await Task.FromResult((IActionResult)View(model));
         }
 
         //CREATE: POST
@@ -51,13 +68,21 @@ namespace App.UI.Controllers
         public async Task<IActionResult> Update(int id)
         {
             var expenseCategoryToUpdate = await _expenseCategoryService.GetExpenseCategoryByIdAsync(id);
+            var users = await _userManager.Users.ToListAsync();
 
             return await Task.FromResult((IActionResult)
                 View(new ExpenseCategoryCRUDModel
                 {
                     Id = expenseCategoryToUpdate.Id,
-                    ExpenseCategoryName = expenseCategoryToUpdate.ExpenseCategoryName
-                }));
+                    ExpenseCategoryName = expenseCategoryToUpdate.ExpenseCategoryName,
+                    Users = users.Select(u => new SelectListItem
+                    {
+                        Value = u.Id,
+                        Text = u.UserName
+                    })
+                }
+                )
+            );
         }
 
         //UPDATE: POST
