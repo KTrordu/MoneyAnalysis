@@ -12,6 +12,13 @@
         <input asp-for="ExpenseCategoryName" class="form-control" disabled/>
         <span asp-validation-for="ExpenseCategoryName" class="text-danger"></span>
     </div>
+    <div class="form-group mb-3">
+        <label asp-for="UserId">User</label>
+        <select asp-for="UserId" asp-items="Model.Users" class="form-control" disabled>
+            <option value=""></option>
+        </select>
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
 
     <button type="submit" class="btn btn-danger">Delete</button>
     <a class="btn btn-dark" asp-controller="ExpenseCategory" asp-action="Index">Back to List</a>
