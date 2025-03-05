@@ -41,6 +41,7 @@ namespace App.BLL.Services
             {
                 ExpenseCategoryName = expenseCategoryDTO.ExpenseCategoryName,
                 Id = expenseCategoryDTO.Id,
+                UserId = expenseCategoryDTO.UserId,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -57,6 +58,7 @@ namespace App.BLL.Services
             {
                 ExpenseCategoryName = e.ExpenseCategoryName,
                 Id = e.Id,
+                UserId = e.UserId,
                 CreatedDate = e.CreatedDate
             });
         }
@@ -69,6 +71,7 @@ namespace App.BLL.Services
             {
                 ExpenseCategoryName = expenseCategory.ExpenseCategoryName,
                 Id = expenseCategory.Id,
+                UserId = expenseCategory.UserId,
                 CreatedDate = expenseCategory.CreatedDate
             };
         }
@@ -92,6 +95,7 @@ namespace App.BLL.Services
             {
                 ExpenseCategoryName = expenseCategoryDTO.ExpenseCategoryName,
                 Id = expenseCategoryDTO.Id,
+                UserId = expenseCategoryDTO.UserId,
                 ModifiedDate = DateTime.Now
             };
 
