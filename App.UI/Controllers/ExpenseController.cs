@@ -19,6 +19,7 @@ namespace App.UI.Controllers
             _userService = userService;
         }
 
+        //GET: List all expenses
         public async Task<IActionResult> Index()
         {
             var expenses = await _expenseService.GetAllExpensesAsync();
@@ -45,6 +46,7 @@ namespace App.UI.Controllers
             return await Task.FromResult((IActionResult)View(expenseList));
         }
 
+        //GET: CREATE
         public async Task<IActionResult> Create()
         {
             var expenseCategories = await _expenseCategoryService.GetAllExpenseCategoriesAsync();
@@ -63,7 +65,7 @@ namespace App.UI.Controllers
                     Text = u.UserName
                 })
             };
-            return await Task.FromResult((IActionResult)RedirectToAction("Index"));
+            return await Task.FromResult((IActionResult)View(model));
         }
     }
 }
