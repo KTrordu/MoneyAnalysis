@@ -1,4 +1,5 @@
-﻿using App.BLL.IServices;
+﻿using App.BLL.DTOs;
+using App.BLL.IServices;
 using App.UI.CRUDModels.Expense;
 using App.UI.ViewModels.Expense;
 using Microsoft.AspNetCore.Mvc;
@@ -66,6 +67,23 @@ namespace App.UI.Controllers
                 })
             };
             return await Task.FromResult((IActionResult)View(model));
+        }
+
+        //POST: CREATE
+        [HttpPost]
+        public async Task<IActionResult> Create(ExpenseCRUDModel model)
+        {
+            var expenseDTO = new ExpenseDTO
+            {
+                ExpenseName = model.ExpenseName,
+                Amount = model.Amount,
+                ExpenseDate = model.ExpenseDate,
+                ExpenseCategoryId = (int)model.ExpenseCategoryId!,
+                UserId = model.UserId
+            };
+
+            await _expenseService.AddExpenseAsync(expenseDTO);
+            return await Task.FromResult((IActionResult)RedirectToAction("Index"));
         }
     }
 }
