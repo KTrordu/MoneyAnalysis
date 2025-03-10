@@ -132,5 +132,44 @@ namespace App.UI.Controllers
             await _expenseService.UpdateExpenseAsync(expenseDTO);
             return await Task.FromResult((IActionResult)RedirectToAction("Index"));
         }
+
+        //GET: DELETE
+        public async Task<IActionResult> Delete(int id)
+        {
+            var expense = await _expenseService.GetExpenseByIdAsync(id);
+            var expenseCategories = await _expenseCategoryService.GetAllExpenseCategoriesAsync();
+            var users = await _userService.GetAllUsersAsync();
+
+            var model = new ExpenseCRUDModel
+            {
+                ExpenseCategories = expenseCategories.Select(e => new SelectListItem
+                {
+                    Value = e.Id.ToString(),
+                    Text = e.ExpenseCategoryName
+                }),
+                Users = users.Select(u => new SelectListItem
+                {
+                    Value = u.Id,
+                    Text = u.UserName
+                }),
+                Id = expense.Id,
+                ExpenseName = expense.ExpenseName,
+                Amount = expense.Amount,
+                ExpenseDate = expense.ExpenseDate,
+                ExpenseCategoryId = expense.ExpenseCategoryId,
+                UserId = expense.UserId
+            };
+
+            return await Task.FromResult((IActionResult)View(model));
+        }
+
+        //POST: DELETE
+        [HttpPost]
+        public async Task<IActionResult> Delete(ExpenseCRUDModel model)
+        {
+            var id = model.Id;
+            await _expenseService.DeleteExpenseAsync(id);
+            return await Task.FromResult((IActionResult)RedirectToAction("Index"));
+        }
     }
 }
