@@ -33,8 +33,7 @@ namespace App.UI.Areas.Identity.Pages.Account
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            ILogger<RegisterModel> logger)
         {
             _userManager = userManager;
             _userStore = userStore;

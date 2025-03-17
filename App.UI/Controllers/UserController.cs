@@ -1,6 +1,7 @@
 ﻿using App.BLL.DTOs;
 using App.BLL.IServices;
 using App.Domain.Entities;
+using App.UI.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +19,9 @@ namespace App.UI.Controllers
         }
 
         //READ: List all users
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_userManager.Users);
+            return await Task.FromResult(View(_userManager.Users));
         }
 
         //UPDATE: GET
